@@ -4,23 +4,39 @@ namespace Challenge_Login_System
 {
     internal class Program
     {
+        // static
+
         private static void Main(string[] args)
         {
             string userName = "";
             string password = "";
             bool isRegistered = false;
 
+            Register(ref userName, ref password);
+
+            Login(userName, password, RegistrationCheck(userName, password));
+
+            Console.Read();
+        }
+
+        // ********************************************************************************
+        /// <summary>
+        /// calling function with two parameters by reference(addresses) not by value because we don't
+        /// want to work with copies but make changes in original variables.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        // <created>Kamil Mikolajewski,03/05/2024</created>
+        // <changed>Kamil Mikolajewski,03/05/2024</changed>
+        // ********************************************************************************
+        public static void Register(ref string userName, ref string password)
+        {
             //input username and password to register in the system
             Console.WriteLine("Please input username and password to register.\n");
             Console.Write("Please input username:");
             userName = Console.ReadLine();
             Console.Write("Please input password:");
             password = Console.ReadLine();
-
-            isRegistered = RegistrationCheck(userName, password);
-            Login(userName, password, isRegistered);
-
-            Console.Read();
         }
 
         // ********************************************************************************
@@ -42,7 +58,8 @@ namespace Challenge_Login_System
             if (user != "" && password != "")
             {
                 isRegister = true;
-                Console.WriteLine($"Registration Successful.\n");
+                Console.WriteLine($"Registration Successful.");
+                Console.WriteLine($"-----------------------------------.");
                 //you can turn on/off displaying username and password. simply comment or uncomment line below
                 //Console.WriteLine($"Your username:{user}\nYour password:{password}");
                 Console.WriteLine("You can login to the system now.");
